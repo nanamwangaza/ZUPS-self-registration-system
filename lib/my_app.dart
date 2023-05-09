@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'registration_form.dart';
+import 'package:zups/create_account.dart';
+import 'package:zups/login.dart';
+import 'package:zups/maelezo_binafsi.dart';
+import 'package:zups/mwakilishi.dart';
+import 'package:zups/njia_za_upokeaji_pension.dart';
+import 'package:zups/welcome.dart';
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const RegistrationForm(),
+      home: const Welcome(),
     );
   }
 }
