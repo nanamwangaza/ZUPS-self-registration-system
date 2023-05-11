@@ -22,23 +22,17 @@ class _RegistrationState extends State<Registration> {
   bool _mme = false;
   bool _mke = false;
   late int _namba_ya_simu;
-  String _mtaa= "";
-  String _SLP= "";
-  String _namba_ya_nyumba="";
-  String _namba_ya_kitambulisho_cha_mzanzibari="";
+  String _mtaa = "";
+  String _SLP = "";
+  String _namba_ya_nyumba = "";
+  String _namba_ya_kitambulisho_cha_mzanzibari = "";
   String _kitambulisho_kingine = "";
   String _namba_ya_kitambulisho_kingine = "";
   String _shehia = "";
-   String _wilaya = "";
-   String _mkoa = "";
-   String _hali_ya_ulemavu = "";
-   bool _posho_ya_wilayani = false;
-
-
-   
-  
-
-
+  String _wilaya = "";
+  String _mkoa = "";
+  String _hali_ya_ulemavu = "";
+  bool _posho_ya_wilayani = false;
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
@@ -56,6 +50,36 @@ class _RegistrationState extends State<Registration> {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xFF1d3557),
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                )),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Nyumbani'),
+              onTap: () {
+                // Navigate to the home screen.
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Kutoka'),
+              onTap: () {
+                // Navigate to the settings screen.
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: Container(
         color: Color(0xFFF5F5F5),
@@ -160,17 +184,15 @@ class _RegistrationState extends State<Registration> {
                           child: TextFormField(
                             controller: _tarehe_ya_kuzaliwa,
                             decoration: InputDecoration(
-                              labelText: 'Tarehe ya Kuzaliwa',labelStyle: TextStyle(
-                                fontSize: 15
-                              )
-                            ),
+                                labelText: 'Tarehe ya Kuzaliwa',
+                                labelStyle: TextStyle(fontSize: 15)),
                           ),
                         ),
                       ),
 
                       SizedBox(height: 20),
 
-                       TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Tafadhali ingiza namba ya simu';
@@ -194,7 +216,7 @@ class _RegistrationState extends State<Registration> {
                           ),
                         ),
                       ),
-                      
+
                       SizedBox(height: 20),
 
                       TextFormField(
@@ -291,7 +313,7 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                       SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       TextFormField(
                         validator: (value) {
@@ -315,7 +337,7 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                     SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       TextFormField(
                         validator: (value) {
@@ -338,10 +360,10 @@ class _RegistrationState extends State<Registration> {
                           ),
                         ),
                       ),
- 
-                             SizedBox(height: 20),
 
-                        TextFormField(
+                      SizedBox(height: 20),
+
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Tafadhali ingiza shehia';
@@ -349,7 +371,7 @@ class _RegistrationState extends State<Registration> {
                           return null;
                         },
                         onSaved: (value) {
-                          _shehia= value!;
+                          _shehia = value!;
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -363,9 +385,9 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                        SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Tafadhali ingiza wilaya';
@@ -387,9 +409,9 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                        SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Tafadhali ingiza mkoa';
@@ -411,9 +433,9 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                        SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Tafadhali ingiza hali ya ulemavu';
@@ -435,57 +457,58 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
 
-                      SizedBox(height: 20,),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Je, unapokea posho ya wilayani? (5,000/=):",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 20,
                       ),
 
-                        SizedBox(height: 20,),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       "Je, unapokea posho ya wilayani? (5,000/=):",
+                      //       style: TextStyle(fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ],
+                      // ),
 
-
-                       Container(
-                         width: 300,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF1d3557),
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 10,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 20,
                       ),
-                         child: TextButton(
-                              onPressed: () {
-                                 if (_formKey.currentState!.validate()) {
+
+                      Container(
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF1d3557),
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MaelezoYaMwakilishi()),
+                                      builder: (context) =>
+                                          MaelezoYaMwakilishi()),
                                 );
-                              }},
-                              child: Text("Endelea", style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                              ),
-                              )
-                              ),
-                       )
-
-  
+                              }
+                            },
+                            child: Text(
+                              "Endelea",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      )
                     ],
-
-
                   ),
                 ))
           ],

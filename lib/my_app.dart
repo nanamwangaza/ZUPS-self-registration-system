@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zups/asante.dart';
 import 'package:zups/create_account.dart';
 import 'package:zups/login.dart';
 import 'package:zups/maelezo_binafsi.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Welcome(),
+      home: const Welcome()
     );
   }
 }

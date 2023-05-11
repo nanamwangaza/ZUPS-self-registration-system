@@ -34,28 +34,28 @@ class _WelcomeState extends State<Welcome> {
                 height: 100,
               ),
               
-              Text("Zanzibar Universal Pension Registration",style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18
-              ),
-              ),
+              // Text("Zanzibar Universal Pension Registration",style: TextStyle(
+              //   color: Colors.white,
+              //   fontWeight: FontWeight.bold,
+              //   fontSize: 18
+              // ),
+              // ),
               SizedBox(
                 height: 50,
               ),
-              CircleAvatar(
-                  radius: 100,
-                  backgroundColor: Colors.white,
-                  child: ClipOval(
-                    child: Image.asset(
-                      'assets/logo.jpg',
-                      width: 150.0,
-                      height: 150.0,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                  ),
-
+              // CircleAvatar(
+              //     radius: 100,
+              //     backgroundColor: Colors.white,
+              //     child: ClipOval(
+              //       child: Image.asset(
+              //         'assets/logo2.jpg',
+              //         width: 150.0,
+              //         height: 150.0,
+              //         fit: BoxFit.cover,
+              //       ),
+              //     )
+              //     ),
+                 Image.asset("assets/logo2.png"),
               SizedBox(
                 height: 30,
               ),

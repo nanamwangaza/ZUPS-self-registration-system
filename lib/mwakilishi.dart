@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:zups/maelezo_binafsi.dart';
 import 'package:zups/njia_za_upokeaji_pension.dart';
 
 class MaelezoYaMwakilishi extends StatefulWidget {
@@ -24,6 +25,15 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>Registration() ),
+                                );
+          },),
         backgroundColor: (Color(0xFF1d3557)),
         title: Text("MAELEZO YA MTU WA KARIBU"),
         centerTitle: true,
