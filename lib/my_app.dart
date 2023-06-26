@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:zups/asante.dart';
+import 'package:zups/benki.dart';
 import 'package:zups/create_account.dart';
+import 'package:zups/karibu.dart';
 import 'package:zups/login.dart';
 import 'package:zups/maelezo_binafsi.dart';
 import 'package:zups/mwakilishi.dart';
 import 'package:zups/njia_za_upokeaji_pension.dart';
-import 'package:zups/welcome.dart';
+import 'package:zups/viambatanisho.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Welcome()
+      home:CreateAccount()
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:zups/create_account.dart';
@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _checkedValue = false;
+  // bool _checkedValue = false;
 
   final _formKey = GlobalKey<FormState>();
   String? _email;
@@ -62,9 +62,34 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Color(0xFF1d3557),
-      child: ListView(
+      body: Stack(
+        children: [
+
+           Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/zanzibar.jpg'),
+                fit: BoxFit.cover
+              )
+            ),
+          ),
+            
+
+            Container(
+              color: Colors.lightBlue.withOpacity(0.4),
+            ),
+
+            
+Padding(
+  padding: const EdgeInsets.only(top: 50,bottom: 10,left: 20,right: 20),
+  child:   Container(
+  
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.white,
+    ),
+  
+        child:ListView(
         children: [
           Center(
             child: SafeArea(
@@ -74,15 +99,21 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 50,
-                    ),
+
+                    Image.asset("assets/logo2.png",
+                            
+                      width: 200,
+                            
+                      height: 200,),
+        
+
+
                     Text(
-                      "Sign In",
+                      "INGIA",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Colors.white,
+                        color: Colors.lightBlue,
                       ),
                     ),
 
@@ -93,8 +124,8 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "E-mail",
-                            style: TextStyle(color: Colors.white),
+                            "Barua pepe",
+                            style: TextStyle(color: Colors.lightBlue),
                           ),
                           SizedBox(
                             height: 10,
@@ -118,11 +149,11 @@ class _LoginPageState extends State<LoginPage> {
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Please enter your email';
+                                    return 'Tafadhali ingiza barua pepe';
                                   }
                                   if (!RegExp(r'\S+@\S+\.\S+')
                                       .hasMatch(value)) {
-                                    return 'Please enter a valid email';
+                                    return 'Tafadhali ingiza barua pepe sahihi';
                                   }
                                   return null;
                                 },
@@ -132,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
-                                  label: Text("E-mail"),
+                                  label: Text("Ingiza barua pepe"),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
                                   border: OutlineInputBorder(
@@ -154,8 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Password",
-                            style: TextStyle(color: Colors.white),
+                            "Nenosiri",
+                            style: TextStyle(color: Colors.lightBlue),
                           ),
                           SizedBox(
                             height: 10,
@@ -179,10 +210,10 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: true,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Please enter your password';
+                                    return 'Tafadhali ingiza nenosiri';
                                   }
                                   if (value.length < 8) {
-                                    return 'Password must be at least 8 characters';
+                                    return 'Nenosiri liwe na angalau herufi 8';
                                   }
                                   return null;
                                 },
@@ -192,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
-                                  label: Text("Password"),
+                                  label: Text("Ingiza nenosiri"),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
                                   border: OutlineInputBorder(
@@ -224,23 +255,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     // Checkbox list tile
-                    CheckboxListTile(
-                      title: Text(
-                        'Remember me',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      value: _checkedValue,
-                      activeColor: Colors.white,
-                      checkColor: Colors.black,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _checkedValue = newValue!;
-                        });
-                      },
-                    ),
+                    // CheckboxListTile(
+                    //   title: Text(
+                    //     'Remember me',
+                    //     style: TextStyle(
+                    //       color: Colors.white,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    //   value: _checkedValue,
+                    //   activeColor: Colors.white,
+                    //   checkColor: Colors.black,
+                    //   onChanged: (newValue) {
+                    //     setState(() {
+                    //       _checkedValue = newValue!;
+                    //     });
+                    //   },
+                    // ),
 
                     Container(
                       width: 300,
@@ -260,8 +291,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextButton(
                           onPressed: _submitForm,
                           child: Text(
-                            "LOGIN",
-                            style: TextStyle(color: Color(0xFF1d3557)),
+                            "INGIA",
+                            style: TextStyle(color: Colors.lightBlue),
                           )),
                     ),
                     SizedBox(height: 10),
@@ -269,8 +300,8 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
-                          style: TextStyle(color: Colors.white),
+                          "Huna akaunti?",
+                          style: TextStyle(color: Colors.lightBlue),
                         ),
                         SizedBox(width: 10),
                         TextButton(
@@ -282,9 +313,9 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             },
                             child: Text(
-                              "SignUp",
+                              "Jisajili",
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.lightBlue,
                                   fontWeight: FontWeight.bold),
                             ))
                       ],
@@ -296,6 +327,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-    ));
-  }
-}
+    )
+     ,
+),
+
+           
+        ],
+      )
+    );
+  }}

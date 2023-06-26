@@ -15,9 +15,15 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   final _formKey = GlobalKey<FormState>();
-  String _name = '';
-  String _email = '';
-  String _password = '';
+  String _jina_la_kwanza='';
+  String _jina_la_katikati = '';
+  String _jina_la_mwisho = '';
+  String _namba_ya_simu='';
+  String _nenosiri='';
+  String _hakiki_neno_siri='';
+  String _barua_pepe='';
+
+  
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -26,9 +32,10 @@ class _CreateAccountState extends State<CreateAccount> {
       final response = await http.post(
         Uri.parse('http://localhost:8000/api/register'),
         body: {
-          'name': _name,
-          'email': _email,
-          'password': _password,
+          'name': _jina_la_kwanza,
+          'email': _jina_la_katikati,
+          'password': _jina_la_mwisho,
+          
         },
       );
       print(response.body);
@@ -64,260 +71,1018 @@ class _CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Color(0xFF003049),
-      child: ListView(
-        children: [
-          Center(
-            child: SafeArea(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white),
-                    ),
-
-                    // Column with text and text field
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Name",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: SizedBox(
-                              height: 60,
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your name';
-                                  }
-
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  _name = value!;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  label: Text("Name"),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    //  Column for password
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "E-mail",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: SizedBox(
-                              height: 60,
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your email';
-                                  }
-                                  if (!RegExp(r'\S+@\S+\.\S+')
-                                      .hasMatch(value)) {
-                                    return 'Please enter a valid email';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  _email = value!;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  label: Text("E-mail"),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Password",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: SizedBox(
-                              height: 60,
-                              child: TextFormField(
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  if (value.length < 8) {
-                                    return 'Password must be at least 8 characters';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  _password = value!;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  label: Text("Password"),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      width: 300,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 10,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: TextButton(
-                          onPressed: _submitForm,
-                          child: Text(
-                            "SIGNUP",
-                            style: TextStyle(color: Color(0xFF1d3557)),
-                          )),
-                    ),
-
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(width: 10),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            },
-                            child: Text(
-                              "SignIn",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ))
-                      ],
-                    )
-                  ],
-                ),
-              ),
+        body: Stack(
+          children: [
+            Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/zanzibar.jpg'),
+                fit: BoxFit.cover
+              )
             ),
           ),
-        ],
+            
+
+            Container(
+              color: Colors.lightBlue.withOpacity(0.4),
+            ),
+
+            
+Padding(
+  padding: const EdgeInsets.only(top: 50,bottom: 10,left: 20,right: 20),
+  child:   Container(
+  
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.white,
+    ),
+  
+        
+  
+        child: ListView(
+        
+          children: [
+        
+            Center(
+        
+              child: SafeArea(
+        
+                child: Form(
+        
+                  key: _formKey,
+        
+                  child: Column(
+        
+                    mainAxisAlignment: MainAxisAlignment.start,
+        
+                    crossAxisAlignment: CrossAxisAlignment.center,
+        
+                    children: [
+        
+        
+        
+                      Image.asset("assets/logo2.png",
+                            
+                      width: 200,
+                            
+                      height: 200,),
+        
+        
+        
+        
+        
+                      // SizedBox(
+        
+                      //   height: 50,
+        
+                      // ),
+        
+                      Text(
+        
+                        "JISAJILI",
+        
+                        style: TextStyle(
+        
+                            fontWeight: FontWeight.bold,
+        
+                            fontSize: 30,
+        
+                            color: Colors.lightBlue),
+        
+                      ),
+        
+        
+        
+                      // Column with text and text field
+        
+                      Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Jina la kwanza" ,
+        
+                              style: TextStyle(color: Colors.lightBlue),
+                              
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza jina kwanza';
+        
+                                    }
+        
+        
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _jina_la_kwanza = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Ingiza jina la kwanza"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+
+                      Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Jina la katikati",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+                              
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza jina la katikati';
+        
+                                    }
+        
+        
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _jina_la_katikati = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Ingiza jina la katikati"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+                       
+
+                       Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Jina la mwisho",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+                              
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza jina la mwisho';
+        
+                                    }
+        
+        
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _jina_la_mwisho = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Ingiza jina la mwisho"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+
+
+                      Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Namba ya simu",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+                              
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza namba ya simu';
+        
+                                    }
+        
+        
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _namba_ya_simu = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Namba ya simu"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+
+                      
+        
+         Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Nenosiri",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  obscureText: true,
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza nenosiri';
+        
+                                    }
+        
+                                    if (value.length < 8) {
+        
+                                      return 'Nenosiri liwe na angalau herufi 8';
+        
+                                    }
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _nenosiri = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Nenosiri"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+        
+        
+        
+        
+        
+                Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Hakiki nenosiri",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  obscureText: true,
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali hakiki nenosiri';
+        
+                                    }
+        
+                                    if (value.length < 8) {
+        
+                                      return 'Nenosiri liwe na angalau herufi 8';
+        
+                                    }
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _hakiki_neno_siri = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Hakiki nenosiri"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                      
+        
+                      Padding(
+        
+                        padding: const EdgeInsets.all(16.0),
+        
+                        child: Column(
+        
+                          crossAxisAlignment: CrossAxisAlignment.start,
+        
+                          children: [
+        
+                            Text(
+        
+                              "Barua pepe",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+        
+                            ),
+        
+                            SizedBox(
+        
+                              height: 10,
+        
+                            ),
+        
+                            Container(
+        
+                              decoration: BoxDecoration(
+        
+                                color: Colors.white,
+        
+                                borderRadius: BorderRadius.circular(10),
+        
+                                boxShadow: [
+        
+                                  BoxShadow(
+        
+                                    color: Colors.grey.withOpacity(0.5),
+        
+                                    spreadRadius: 1,
+        
+                                    blurRadius: 10,
+        
+                                    offset: Offset(0, 3),
+        
+                                  ),
+        
+                                ],
+        
+                              ),
+        
+                              child: SizedBox(
+        
+                                height: 60,
+        
+                                child: TextFormField(
+        
+                                  validator: (value) {
+        
+                                    if (value!.isEmpty) {
+        
+                                      return 'Tafadhali ingiza barua pepe';
+        
+                                    }
+        
+                                    if (!RegExp(r'\S+@\S+\.\S+')
+        
+                                        .hasMatch(value)) {
+        
+                                      return 'Tafadhali ingiza barua pepe sahihi';
+        
+                                    }
+        
+                                    return null;
+        
+                                  },
+        
+                                  onSaved: (value) {
+        
+                                    _barua_pepe = value!;
+        
+                                  },
+        
+                                  decoration: InputDecoration(
+        
+                                    filled: true,
+        
+                                    fillColor: Colors.white,
+        
+                                    label: Text("Barua pepe"),
+        
+                                    floatingLabelBehavior:
+        
+                                        FloatingLabelBehavior.never,
+        
+                                    border: OutlineInputBorder(
+        
+                                      borderRadius: BorderRadius.circular(10),
+        
+                                      borderSide: BorderSide.none,
+        
+                                    ),
+        
+                                  ),
+        
+                                ),
+        
+                              ),
+        
+                            )
+        
+                          ],
+        
+                        ),
+        
+                      ),
+        
+        
+        
+                     
+                      Container(
+        
+                        width: 300,
+        
+                        height: 50,
+        
+                        decoration: BoxDecoration(
+        
+                          color: Colors.white,
+        
+                          borderRadius: BorderRadius.circular(30),
+        
+                          boxShadow: [
+        
+                            BoxShadow(
+        
+                              color: Colors.grey.withOpacity(0.5),
+        
+                              spreadRadius: 1,
+        
+                              blurRadius: 10,
+        
+                              offset: Offset(0, 3),
+        
+                            ),
+        
+                          ],
+        
+                        ),
+        
+                        child: TextButton(
+        
+                            onPressed: _submitForm,
+        
+                            child: Text(
+        
+                              "JISAJILI",
+        
+                              style: TextStyle(color: Colors.lightBlue),
+        
+                            )),
+        
+                      ),
+        
+        
+        
+                      SizedBox(height: 10),
+        
+                      Row(
+        
+                        mainAxisAlignment: MainAxisAlignment.center,
+        
+                        children: [
+        
+                          Text(
+        
+                            "Una akaunti tayari?",
+        
+                            style: TextStyle(color: Colors.lightBlue),
+        
+                          ),
+        
+                          SizedBox(width: 10),
+        
+                          TextButton(
+        
+                              onPressed: () {
+        
+                                Navigator.push(
+        
+                                  context,
+        
+                                  MaterialPageRoute(
+        
+                                      builder: (context) => LoginPage()),
+        
+                                );
+        
+                              },
+        
+                              child: Text(
+        
+                                "Ingia",
+        
+                                style: TextStyle(
+        
+                                    color: Colors.lightBlue,
+        
+                                    fontWeight: FontWeight.bold),
+        
+                              ))
+        
+                        ],
+        
+                      )
+        
+                    ],
+        
+                  ),
+        
+                ),
+        
+              ),
+        
+            ),
+        
+          ],
+        
+        ),
+  
       ),
-    ));
+)
+          ],
+        ));
   }
 }

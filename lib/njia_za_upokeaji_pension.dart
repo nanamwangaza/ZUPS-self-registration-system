@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:zups/asante.dart';
+
 import 'package:zups/mwakilishi.dart';
 
 class NjiaZaUpokeajiPension extends StatefulWidget {
@@ -173,38 +173,38 @@ class _NjiaZaUpokeajiPensionState extends State<NjiaZaUpokeajiPension> {
 
                       
                           
-                           Container(
-                             width: 300,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1d3557),
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                                offset: Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                             child: TextButton(
-                                  onPressed:(){
-                                      if (_formKey.currentState!.validate()) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>Asante() ),
-                                );
-                              }
-                                  },
-                                  child: Text("KUSANYA", style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                  )
-                                  ),
-                           )
+                          //  Container(
+                          //    width: 300,
+                          // height: 50,
+                          // decoration: BoxDecoration(
+                          //   color: Color(0xFF1d3557),
+                          //   borderRadius: BorderRadius.circular(30),
+                          //   boxShadow: [
+                          //     BoxShadow(
+                          //       color: Colors.grey.withOpacity(0.5),
+                          //       spreadRadius: 1,
+                          //       blurRadius: 10,
+                          //       offset: Offset(0, 3),
+                          //     ),
+                          //   ],
+                          // ),
+                          //    child: TextButton(
+                          //         onPressed:(){
+                          //             if (_formKey.currentState!.validate()) {
+                          //       Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) =>Asante() ),
+                          //       );
+                          //     }
+                          //         },
+                          //         child: Text("KUSANYA", style: TextStyle(
+                          //           color: Colors.white,
+                          //           fontWeight: FontWeight.bold
+                          //         ),
+                          //         )
+                          //         ),
+                          //  )
 
                       
 
