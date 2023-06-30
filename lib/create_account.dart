@@ -20,7 +20,7 @@ class _CreateAccountState extends State<CreateAccount> {
   String _jina_la_mwisho = '';
   String _namba_ya_simu='';
   String _nenosiri='';
-  String _hakiki_neno_siri='';
+  // String _hakiki_neno_siri='';
   String _barua_pepe='';
 
   
@@ -32,9 +32,14 @@ class _CreateAccountState extends State<CreateAccount> {
       final response = await http.post(
         Uri.parse('http://localhost:8000/api/register'),
         body: {
-          'name': _jina_la_kwanza,
-          'email': _jina_la_katikati,
-          'password': _jina_la_mwisho,
+          'first_name': _jina_la_kwanza,
+          'middle_name': _jina_la_katikati,
+          'last_name': _jina_la_mwisho,
+          'phone_number': _namba_ya_simu,
+          'password': _nenosiri,
+            // String _hakiki_neno_siri='';
+          'email':_barua_pepe,
+
           
         },
       );
@@ -723,121 +728,121 @@ Padding(
         
         
         
-                Padding(
+                // Padding(
         
-                        padding: const EdgeInsets.all(16.0),
+                //         padding: const EdgeInsets.all(16.0),
         
-                        child: Column(
+                //         child: Column(
         
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                //           crossAxisAlignment: CrossAxisAlignment.start,
         
-                          children: [
+                //           children: [
         
-                            Text(
+                //             Text(
         
-                              "Hakiki nenosiri",
+                //               "Hakiki nenosiri",
         
-                              style: TextStyle(color: Colors.lightBlue),
+                //               style: TextStyle(color: Colors.lightBlue),
         
-                            ),
+                //             ),
         
-                            SizedBox(
+                //             SizedBox(
         
-                              height: 10,
+                //               height: 10,
         
-                            ),
+                //             ),
         
-                            Container(
+                //             Container(
         
-                              decoration: BoxDecoration(
+                //               decoration: BoxDecoration(
         
-                                color: Colors.white,
+                //                 color: Colors.white,
         
-                                borderRadius: BorderRadius.circular(10),
+                //                 borderRadius: BorderRadius.circular(10),
         
-                                boxShadow: [
+                //                 boxShadow: [
         
-                                  BoxShadow(
+                //                   BoxShadow(
         
-                                    color: Colors.grey.withOpacity(0.5),
+                //                     color: Colors.grey.withOpacity(0.5),
         
-                                    spreadRadius: 1,
+                //                     spreadRadius: 1,
         
-                                    blurRadius: 10,
+                //                     blurRadius: 10,
         
-                                    offset: Offset(0, 3),
+                //                     offset: Offset(0, 3),
         
-                                  ),
+                //                   ),
         
-                                ],
+                //                 ],
         
-                              ),
+                //               ),
         
-                              child: SizedBox(
+                //               child: SizedBox(
         
-                                height: 60,
+                //                 height: 60,
         
-                                child: TextFormField(
+                //                 child: TextFormField(
         
-                                  obscureText: true,
+                //                   obscureText: true,
         
-                                  validator: (value) {
+                //                   validator: (value) {
         
-                                    if (value!.isEmpty) {
+                //                     if (value!.isEmpty) {
         
-                                      return 'Tafadhali hakiki nenosiri';
+                //                       return 'Tafadhali hakiki nenosiri';
         
-                                    }
+                //                     }
         
-                                    if (value.length < 8) {
+                //                     if (value.length < 8) {
         
-                                      return 'Nenosiri liwe na angalau herufi 8';
+                //                       return 'Nenosiri liwe na angalau herufi 8';
         
-                                    }
+                //                     }
         
-                                    return null;
+                //                     return null;
         
-                                  },
+                //                   },
         
-                                  onSaved: (value) {
+                //                   onSaved: (value) {
         
-                                    _hakiki_neno_siri = value!;
+                //                     _hakiki_neno_siri = value!;
         
-                                  },
+                //                   },
         
-                                  decoration: InputDecoration(
+                //                   decoration: InputDecoration(
         
-                                    filled: true,
+                //                     filled: true,
         
-                                    fillColor: Colors.white,
+                //                     fillColor: Colors.white,
         
-                                    label: Text("Hakiki nenosiri"),
+                //                     label: Text("Hakiki nenosiri"),
         
-                                    floatingLabelBehavior:
+                //                     floatingLabelBehavior:
         
-                                        FloatingLabelBehavior.never,
+                //                         FloatingLabelBehavior.never,
         
-                                    border: OutlineInputBorder(
+                //                     border: OutlineInputBorder(
         
-                                      borderRadius: BorderRadius.circular(10),
+                //                       borderRadius: BorderRadius.circular(10),
         
-                                      borderSide: BorderSide.none,
+                //                       borderSide: BorderSide.none,
         
-                                    ),
+                //                     ),
         
-                                  ),
+                //                   ),
         
-                                ),
+                //                 ),
         
-                              ),
+                //               ),
         
-                            )
+                //             )
         
-                          ],
+                //           ],
         
-                        ),
+                //         ),
         
-                      ),
+                //       ),
         
         
         

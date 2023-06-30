@@ -13,8 +13,8 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
-  final TextEditingController _dateController = TextEditingController();
+  TextEditingController _tarehe_ya_kuzaliwa_controller =
+      TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -25,29 +25,25 @@ class _RegistrationState extends State<Registration> {
     );
 
     if (picked != null) {
-      _dateController.text = picked.toString(); // Update the date value
+      _tarehe_ya_kuzaliwa_controller.text =
+          picked.toString(); // Update the date value
     }
   }
-
 
   final _formKey = GlobalKey<FormState>();
 
   // TextEditingController _tarehe_ya_kuzaliwa = TextEditingController();
   // TextEditingController _tarehe_ya_kuingia_Zanzibar = TextEditingController();
 
-  String _jina_kamili_la_mzee = "";
-  late int _umri;
-  late int _namba_ya_simu;
-  String _mtaa = "";
-  String _SLP = "";
-  String _namba_ya_nyumba = "";
-  String _namba_ya_kitambulisho_cha_mzanzibari = "";
-  String _kitambulisho_kingine = "";
-  String _namba_ya_kitambulisho_kingine = "";
+  DateTime? _tarehe_ya_kuzaliwa;
+  String _hali_ya_ulemavu = "";
+  int? _namba_ya_kitambulisho_cha_mzanzibari;
   String _shehia = "";
+  String _mtaa = "";
   String _wilaya = "";
   String _mkoa = "";
-  String _hali_ya_ulemavu = "";
+  int? namba_ya_nyumba;
+  String? _jinsia;
 
   Future<void> postData() async {
     try {
@@ -58,20 +54,14 @@ class _RegistrationState extends State<Registration> {
       };
 
       var data = {
-        'jina_kamili_la_mzee': _jina_kamili_la_mzee,
-        'umri': _umri.toString(),
-        'namba_ya_simu': _namba_ya_simu.toString(),
-        'mtaa': _mtaa,
-        'SLP': _SLP,
-        'namba_ya_nyumba': _namba_ya_nyumba,
+        'tarehe_ya_kuzaliwa': _tarehe_ya_kuzaliwa,
+        '_hali_ya_ulemvu': _hali_ya_ulemavu,
         'namba_ya_kitambulisho_cha_mzanzibari':
             _namba_ya_kitambulisho_cha_mzanzibari,
-        'kitambulisho_kingine': _kitambulisho_kingine,
-        'namba_ya_kitambulisho_kingine': _namba_ya_kitambulisho_kingine,
         'shehia': _shehia,
+        'mtaa': _mtaa,
         'wilaya': _wilaya,
         'mkoa': _mkoa,
-        'hali_ya_ulemavu': _hali_ya_ulemavu,
       };
 
       var body = jsonEncode(data);
@@ -98,7 +88,7 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.lightBlue,
+        backgroundColor: Colors.lightBlue,
         title: Text(
           "MAELEZO BINAFSI YA MZEE",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -145,41 +135,45 @@ class _RegistrationState extends State<Registration> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-
                       TextFormField(
-                           controller: _dateController,
-              readOnly: true,
-              onTap: () {
-                _selectDate(context);
-              },
-              decoration: InputDecoration(
-                label: Text("Tarehe ya kuzaliwa"),
-                 border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                
-                suffixIcon: Icon(Icons.calendar_today),
-              ),
-            
+                        controller: _tarehe_ya_kuzaliwa_controller,
+                        readOnly: true,
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        decoration: InputDecoration(
+                          label: Text("Tarehe ya kuzaliwa"),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          suffixIcon: Icon(Icons.calendar_today),
                         ),
-                
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Tafadhali ingiza tarehe ya kuzaliwa';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _tarehe_ya_kuzaliwa = value as DateTime?;
+                        },
+                      ),
                       SizedBox(height: 20),
 
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza hali ya ulemavu';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          _hali_ya_ulemavu = value!;
                         },
-                        keyboardType: TextInputType.number,
+
                         // brings keyboard with numbers only
                         decoration: InputDecoration(
                           filled: true,
@@ -192,18 +186,62 @@ class _RegistrationState extends State<Registration> {
                           ),
                         ),
                       ),
+
+
                       SizedBox(height: 20),
-                      
+
+
+                      DropdownButtonFormField<String>(
+                        value: _jinsia,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _jinsia = newValue;
+                          });
+                        },
+                        onSaved: (String? value) {
+                          // Save the selected gender value
+                          _jinsia = value;
+                        },
+
+                        //   validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return 'Tafadhali chagua jinsia';
+                        //   }
+                        //   return null;
+                        // },
+                        items: [
+                          DropdownMenuItem(
+                            
+                            value: 'Mme',
+                            child: Text('Mme'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Mke',
+                            child: Text('Mke'),
+                          ),
+                        ],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          labelText: 'Jinsia',
+                        ), 
+                      ),
+
+                      SizedBox(height: 20),
+
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza namba ya simu';
+                            return 'Tafadhali ingiza namba ya kitambulisho cha mzanzibari';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _namba_ya_simu = int.parse(value!);
-                          // converting int to string
+                          _namba_ya_kitambulisho_cha_mzanzibari = value as int?;
                         },
                         keyboardType: TextInputType.number,
                         // brings keyboard with numbers only
@@ -219,20 +257,16 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(height: 20),
-
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza shehia';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          _shehia = value!;
                         },
-                        keyboardType: TextInputType.number,
-                        // brings keyboard with numbers only
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -245,20 +279,16 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(height: 20),
-
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza mtaa';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          _mtaa = value!;
                         },
-                        keyboardType: TextInputType.number,
-                        // brings keyboard with numbers only
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -271,19 +301,16 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(height: 20),
-                        TextFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza wilaya';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          _wilaya = value!;
                         },
-                        keyboardType: TextInputType.number,
-                        // brings keyboard with numbers only
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -296,20 +323,16 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(height: 20),
-
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza mkoa';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          _mkoa = value!;
                         },
-                        keyboardType: TextInputType.number,
-                        // brings keyboard with numbers only
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -321,20 +344,16 @@ class _RegistrationState extends State<Registration> {
                           ),
                         ),
                       ),
-                              
-                              SizedBox(height: 20),
-
-                              
-                        TextFormField(
+                      SizedBox(height: 20),
+                      TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza  umri';
+                            return 'Tafadhali ingiza namba ya nyumba';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _umri = int.parse(value!);
-                          // converting int to string
+                          namba_ya_nyumba = value as int?;
                         },
                         keyboardType: TextInputType.number,
                         // brings keyboard with numbers only
@@ -350,231 +369,6 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza jina la mtaa';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _mtaa = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Mtaa"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza anwani kamili';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _SLP = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Anwani Kamili (SLP)"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza namba ya nyumba';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _namba_ya_nyumba = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Namba ya Nyumba"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza namba ya kitambulisho cha Mzanzibari';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _namba_ya_kitambulisho_cha_mzanzibari = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Namba ya kitambulisho cha Mzanzibari"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza kitambulisho kingine';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _kitambulisho_kingine = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Kitambulisho kingine"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza namba ya kitambulisho kingine';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _namba_ya_kitambulisho_kingine = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Namba ya Kitambulisho kingine"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza shehia';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _shehia = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Shehia"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza wilaya';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _wilaya = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Wilaya"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza mkoa';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _mkoa = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Mkoa"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 20),
-                      // TextFormField(
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return 'Tafadhali ingiza hali ya ulemavu';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   onSaved: (value) {
-                      //     _hali_ya_ulemavu = value!;
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     filled: true,
-                      //     fillColor: Colors.white,
-                      //     label: Text("Hali ya Ulemavu"),
-                      //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide.none,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
                       Container(
                         width: 300,
                         height: 50,

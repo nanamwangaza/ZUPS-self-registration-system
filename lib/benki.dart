@@ -11,8 +11,8 @@ class _BenkiState extends State<Benki> {
 
   final _formKey = GlobalKey<FormState>();
    String _jina_la_benki="";
-  //  String _jina_la_akaunti="";
-  //  String _jina_la_benki="";
+   String _jina_la_akaunti="";
+   int? _akaunti_namba;
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +60,12 @@ class _BenkiState extends State<Benki> {
                        TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza jina la benki';
+                            return 'Tafadhali ingiza jina la akaunti';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _jina_la_benki = value!;
+                          _jina_la_akaunti = value!;
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -84,12 +84,12 @@ class _BenkiState extends State<Benki> {
                        TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Tafadhali ingiza jina la benki';
+                            return 'Tafadhali ingiza akaunti namba';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _jina_la_benki = value!;
+                          _akaunti_namba = value! as int?;
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -121,23 +121,14 @@ class _BenkiState extends State<Benki> {
                           ],
                         ),
                         child: TextButton(
-                          onPressed: () {},
-                          // async {
-                          //   if (_formKey.currentState!.validate()) {
-                          //     try {
-                          //       await postData();
-                          //       Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //           builder: (context) => MaelezoYaMwakilishi(),
-                          //         ),
-                          //       );
-                          //     } catch (e) {
-                          //       print('Error: $e');
-                          //       // Handle the error appropriately
-                          //     }
-                          //   }
-                          // },
+                          onPressed: () {
+                            //  Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => MaelezoYaMwakilishi(),
+                            //       ),
+                            //     );
+                          },
                           child: Text(
                             "Endelea",
                             style: TextStyle(

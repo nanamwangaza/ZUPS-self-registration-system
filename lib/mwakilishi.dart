@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:zups/benki.dart';
 import 'package:zups/maelezo_binafsi.dart';
 import 'package:zups/njia_za_upokeaji_pension.dart';
 
@@ -13,7 +14,7 @@ class MaelezoYaMwakilishi extends StatefulWidget {
 
 class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
 
-  final TextEditingController _dateController = TextEditingController();
+   TextEditingController _dateController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -30,12 +31,13 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
 
 
  final _formKey = GlobalKey<FormState>();
- String _jina_la_mwakilishi="";
- String _anapoishi_mwakilishi="";
- String _uhusiano_na_mhusika="";
- late int _namba_ya_simu_ya_mwakilishi;
- late int _namba_ya_nyumba_ya_mwakilishi;
- late int _namba_ya_kitambulisho_cha_mzanzibari_cha_mwakilishi;
+ String _jina_la_kwanza_mwakilishi="";
+ String _jina_la_katikati_mwakilishi="";
+ String _jina_la_mwisho_mwakilishi="";
+ DateTime? _tarehe_ya_kuzaliwa_mwakilishi;
+ String _namba_ya_simu_mwakilishi="";
+ int? _namba_ya_kitambulisho_cha_mzanzibari_mwakilishi;
+ String _uhusiano_na_mzee="";
 
   @override
   Widget build(BuildContext context) {
@@ -73,17 +75,17 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                     TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza jina la kwanza la mwakilishi';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _jina_la_kwanza_mwakilishi = value!;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Jina la kwanza"),
+                            label: Text("Jina la kwanza la mwakilishi"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -97,17 +99,17 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                         TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza jina la katikati la mwakilishi';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _jina_la_katikati_mwakilishi = value!;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Jina la katikati"),
+                            label: Text("Jina la katikati la mwakilishi"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -121,17 +123,17 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                          TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza jina la mwisho la mwakilishi';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _jina_la_mwisho_mwakilishi = value!;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Jina la mwisho"),
+                            label: Text("Jina la mwisho la mwakilishi"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -149,6 +151,16 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
               onTap: () {
                 _selectDate(context);
               },
+
+               validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Tafadhali ingiza tarehe ya kuzaliwa';
+                          }
+                          return null;
+                        },
+               onSaved: (value) {
+                          _tarehe_ya_kuzaliwa_mwakilishi = value as DateTime?;
+                        },
               decoration: InputDecoration(
                 label: Text("Tarehe ya kuzaliwa"),
                  border: OutlineInputBorder(
@@ -162,7 +174,7 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
               ),
             
                         ),
-                        SizedBox(height: 20),
+                        
 
                          
 
@@ -171,17 +183,17 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                          TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza namba ya simu ya mwakilishi';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _namba_ya_simu_mwakilishi = value! ;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Namba ya simu"),
+                            label: Text("Namba ya simu ya mwakilishi"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -189,21 +201,23 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                             ),
                           ),
                         ),
+
                          SizedBox(height: 20),
+
                          TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza namba ya kitambulisho cha mzanzibari';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _namba_ya_kitambulisho_cha_mzanzibari_mwakilishi = value! as int?;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Namba ya kitambulisho cha mzanzibari"),
+                            label: Text("Namba ya kitambulisho cha mzanzibari cha mwakilishi"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -212,24 +226,24 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                           ),
                         ),
 
-                        SizedBox(height: 20),
+                        // SizedBox(height: 20),
 
 
                         SizedBox(height: 20),
                          TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Tafadhali ingiza jina la mwakilishi';
+                              return 'Tafadhali ingiza uhusiano na mzee';
                             }
                             return null;
                           },
                           onSaved: (value) {
-                            _jina_la_mwakilishi = value!;
+                            _uhusiano_na_mzee = value!;
                           },
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            label: Text("Uhusiano"),
+                            label: Text("Uhusiano na mzee"),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -422,9 +436,10 @@ class _MaelezoYaMwakilishiState extends State<MaelezoYaMwakilishi> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => NjiaZaUpokeajiPension()),
+                                      builder: (context) => Benki()),
                                 );
-                              }};
+                              }
+                              };
                                   },
                                   child: Text("KUSANYA", style: TextStyle(
                                     color: Colors.white,
