@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zups/viambatanisho.dart';
 
 class Benki extends StatefulWidget {
   const Benki({super.key});
@@ -121,14 +122,17 @@ class _BenkiState extends State<Benki> {
                           ],
                         ),
                         child: TextButton(
-                          onPressed: () {
-                            //  Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) => MaelezoYaMwakilishi(),
-                            //       ),
-                            //     );
-                          },
+                         onPressed:(){
+                                    {
+                                 if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Viambatanisho()),
+                                );
+                              }
+                              };
+                                  },
                           child: Text(
                             "Endelea",
                             style: TextStyle(
