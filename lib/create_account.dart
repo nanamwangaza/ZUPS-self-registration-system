@@ -33,7 +33,7 @@ class _CreateAccountState extends State<CreateAccount> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Registration Failed'),
-              content: Text('Nenosiri na hakiki nenosiri hazilingani'),
+              content: Text('Password and Confirm_password'),
               actions: [
                 TextButton(
                   child: Text('OK'),
@@ -295,8 +295,10 @@ class _CreateAccountState extends State<CreateAccount> {
                                       onSaved: (value) {
                                         _jina_la_mwisho = value!;
                                       },
+                                      
                                       decoration: InputDecoration(
                                         filled: true,
+                                        
                                         fillColor: Colors.white,
                                         label: Text("Ingiza jina la mwisho"),
                                         floatingLabelBehavior:
@@ -342,20 +344,34 @@ class _CreateAccountState extends State<CreateAccount> {
                                   child: SizedBox(
                                     height: 60,
                                     child: TextFormField(
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Tafadhali ingiza namba ya simu';
-                                        }
+                                       validator: (value) {
+              if (value!.isEmpty) {
+                return 'Tafadhali ingiza namba ya simu';
+              }
 
-                                        return null;
-                                      },
-                                      onSaved: (value) {
-                                        _namba_ya_simu = value!;
-                                      },
+              if (value.length!=10) {
+                return 'Ingiza namba sahihi';
+              }
+               if (!value.startsWith('0')) {
+    return 'Ingiza namba sahihi';
+  }
+
+              
+             
+
+              return null;
+            },
+            onSaved: (value) {
+              _namba_ya_simu = value!;
+            },
+            keyboardType: TextInputType.number,
+                                      // onSaved: (value) {
+                                      //   _namba_ya_simu = value!;
+                                      // },
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
-                                        label: Text("Namba ya simu"),
+                                        label: Text("Namba ya simu(Anza na 0)"),
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.never,
                                         border: OutlineInputBorder(
